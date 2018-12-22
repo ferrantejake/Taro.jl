@@ -13,8 +13,8 @@ if !isfile(fop_gz)
     download("http://apache.osuosl.org/xmlgraphics/fop/binaries/fop-2.0-bin.tar.gz", fop_gz)
 end
 if !isfile(fop_jar)
-    if is_unix() unpack_cmd = `tar xzf $fop_gz --directory=$tdeps` end
-    if is_windows()
+    if Sys.isunix() unpack_cmd = `tar xzf $fop_gz --directory=$tdeps` end
+    if Sys.iswindows()
         exe7z = joinpath(JULIA_HOME, "7z.exe")
         unpack_cmd = pipeline(`$exe7z x $fop_gz -y -so`,`$exe7z x -si -y -ttar -o$tdeps`)
     end
